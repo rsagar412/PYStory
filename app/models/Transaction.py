@@ -2,19 +2,25 @@ from decimal import Decimal    #production grade application needs decimal for e
 from dataclasses import dataclass   #automatically generates the constructor to help initialize the values similar to lombok
 from enum import Enum
 
-class Currency(str, Enum)
+class Currency(str, Enum):
     INR = "INR"
     USD = "USD"
     EUR = "EUR"
+
+class TransactionStatus(str, Enum):
+    PENDING = "PENDING"
+    ACTIVE = "ACTIVE"
+    INVALID = "INVALID"
+    SUCCESS = "SUCCESS"
 
 @dataclass       
 class Transaction: 
     transaction_id: str
     merchant_id: str
-    amount: float
-    currency: str
+    customer_id: str
+    amount: Decimal
+    currency: Currency
     status: str
-    ):
 
 
 
