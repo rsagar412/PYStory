@@ -15,6 +15,4 @@ class TransactionValidator:
 
         if transaction.amount <= 0: 
             raise TransactionValidationException("Transaction amount must be greater than zero.")   
-        
-        if transaction.transaction_id.__len__ < 5:
-          raise TransactionValidationException("Transaction Id must be 5 characters long.")
+    
