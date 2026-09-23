@@ -21,6 +21,7 @@ class Transaction:
     amount: Decimal
     currency: Currency
     status: str
+    
 
 
 
