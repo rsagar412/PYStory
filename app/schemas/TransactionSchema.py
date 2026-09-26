@@ -12,5 +12,5 @@ class TransactionRequest(BaseModel):
 
 class TransactionResponse(BaseModel):
     transaction_id : str
-    status: str
-    result: str
+    status: TransactionStatus
+    result: TransactionProcessingResult

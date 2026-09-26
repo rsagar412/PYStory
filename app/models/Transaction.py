@@ -13,6 +13,12 @@ class TransactionStatus(str, Enum):
     INVALID = "INVALID"
     SUCCESS = "SUCCESS"
 
+class TransactionProcessingResult(str, Enum):
+    PROCESSED = "PROCESSED"
+    PENDING = "PENDING"
+    REJECTED = "REJECTED"
+    REQUIRES_REVIEW = "REQUIRES_REVIEW"
+
 @dataclass       
 class Transaction: 
     transaction_id: str

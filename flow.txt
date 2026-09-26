@@ -1,0 +1,5 @@
+Router -> Service -> Exception -> handler
+
+HTTP -> fastapi ->ROUTER ->Pydantic Validations -> Domain Transaction -> Validator -> Service -> Processing Result -> JSON
+Exceptions - Service -> success -> response
+                Exception -> handler -> error

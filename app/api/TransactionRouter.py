@@ -1,19 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, status
+from app.services.TransactionService import TransactionService
+from app.dependencies.TransactionDependencies import get_transaction_service
 from app.schemas.TransactionSchema import (TransactionRequest, TransactionResponse)
 from app.models.Transaction import Transaction
-from app.services.TransactionService import TransactionService
-from app.validators.TransactionValidator import TransactionValidator
+
 
 router = APIRouter(
     prefix = "/api/v1/transaction",
     tags=["Transactions"],
 )
 
-validator = TransactionValidator()
-transaction_service = TransactionService(validator)
-
-@router.post("/", response_model=TransactionResponse)
-def create_transaction(request: TransactionRequest): 
+@router.post("/create", response_model=TransactionResponse, status_code=status.HTTP_201_CREATED)
+def create_transaction(request: TransactionRequest, transaction_service: TransactionService = Depends(get_transaction_service)): 
     transaction = Transaction (
     transaction_id = request.transaction_id,
     merchant_id = request.merchant_id,
@@ -24,7 +22,7 @@ def create_transaction(request: TransactionRequest):
     )
     result = transaction_service.processTransaction(transaction)
     return TransactionResponse(transaction_id=transaction.transaction_id,
-                               status = transaction.status.value,
+                               status = transaction.status,
                                result=result)
 
 @router.get("/health")

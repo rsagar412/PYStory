@@ -1,0 +1,36 @@
+Successful
+{
+  "transaction_id": "TXN10001",
+  "merchant_id": "MERCHANT001",
+  "customer_id": "CUSTOMER001",
+  "amount": "1500.50",
+  "currency": "INR",
+  "status": "SUCCESS"
+}
+
+
+{
+  "transaction_id": "TXN10001",
+  "status": "SUCCESS",
+  "result": "PROCESSED"
+}
+
+
+Pending
+
+REVIEW 
+
+{
+  "transaction_id": "TXN10001",
+  "merchant_id": "MERCHANT001",
+  "customer_id": "CUSTOMER001",
+  "amount": "15000050",
+  "currency": "INR",
+  "status": "SUCCESS"
+}
+
+{
+    "transaction_id": "TXN10001",
+    "status": "SUCCESS",
+    "result": "REQUIRES_REVIEW"
+}

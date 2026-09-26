@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from app.api.TransactionRouter import router as transaction_router
+from app.exceptions.ExceptionHandler import (transaction_validation_exception_handler)
+from app.exceptions.TransactionExceptions import (TransactionValidationException)
 
 app = FastAPI(
     title = "FinAI",
@@ -7,6 +9,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.add_exception_handler(TransactionValidationException, transaction_validation_exception_handler)
 app.include_router(transaction_router)
 
 
