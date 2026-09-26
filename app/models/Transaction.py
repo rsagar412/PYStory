@@ -20,7 +20,7 @@ class Transaction:
     customer_id: str
     amount: Decimal
     currency: Currency
-    status: str
+    status: TransactionStatus
     
 
 
