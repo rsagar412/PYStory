@@ -1,6 +1,8 @@
 from app.services.TransactionService import TransactionService
 from app.validators.TransactionValidator import TransactionValidator
+from app.repositories.TransactionRepository import TransactionRepository
 
 def get_transaction_service() -> TransactionService:
     validator = TransactionValidator()
-    return TransactionService(validator)
+    repository = TransactionRepository()
+    return TransactionService(validator, repository)

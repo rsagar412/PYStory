@@ -27,6 +27,7 @@ class Transaction:
     amount: Decimal
     currency: Currency
     status: TransactionStatus
+    processing_result: TransactionProcessingResult | None = None
     
 
 

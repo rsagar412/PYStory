@@ -93,3 +93,31 @@ def test_create_pending_transaction():
     assert response.status_code == 201
     body = response.json()
     assert body["result"] == "PENDING"
+
+def test_get_transaction():
+
+    create_response = client.post(
+        "/api/v1/transaction/",
+        json={
+            "transaction_id": "TXN20001",
+            "merchant_id": "MERCHANT001",
+            "customer_id": "CUSTOMER001",
+            "amount": "1500.50",
+            "currency": "INR",
+            "status": "SUCCESS",
+        },
+    )
+
+    assert create_response.status_code == 201
+
+    response = client.get(
+        "/api/v1/transaction/TXN20001"
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["transaction_id"] == "TXN20001"
+    assert body["status"] == "SUCCESS"
+    assert body["result"] == "PROCESSED"
