@@ -25,18 +25,19 @@ def create_transaction(request: TransactionRequest, transaction_service: Transac
                                status = transaction.status,
                                result=result)
 
+@router.get("/health")
+def transaction_health():
+    return {"service": "transaction", "status": "UP"}
+
 @router.get("/{transaction_id}", response_model = TransactionResponse)
 def get_transaction(transaction_id: str, transaction_service: TransactionService = Depends(get_transaction_service)
                     ):
     transaction = transaction_service.get_transaction(transaction_id)
     if transaction is None:
-        raise HttpException(status_code = status.HTTP_404_NOT_FOUND, detail = "Transaction not found")
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Transaction not found")
     return TransactionResponse(transaction_id  = transaction.transaction_id,
                                status=transaction.status,
-                               result="PROCESSED")
+                               result = transaction.processing_result)
 
 
-@router.get("/health")
-def transaction_health():
-    return {"service": "transaction", "status": "UP"}
 

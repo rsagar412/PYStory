@@ -13,11 +13,11 @@ class TransactionService:
     def processTransaction(self, transaction: Transaction) -> TransactionProcessingResult:
         self.validator.validate(transaction)
         if transaction.amount > MAX_TRANSACTION_AMOUNT:
-            return TransactionProcessingResult.REQUIRES_REVIEW
+            result = TransactionProcessingResult.REQUIRES_REVIEW
         elif transaction.status.value == "SUCCESS":
-            return TransactionProcessingResult.PROCESSED
+            result = TransactionProcessingResult.PROCESSED
         elif transaction.status.value == "PENDING":
-            return TransactionProcessingResult.PENDING
+            result = TransactionProcessingResult.PENDING
         else:
             result = TransactionProcessingResult.REJECTED
         transaction.processing_result = result

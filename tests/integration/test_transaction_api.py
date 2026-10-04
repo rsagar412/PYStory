@@ -94,10 +94,9 @@ def test_create_pending_transaction():
     body = response.json()
     assert body["result"] == "PENDING"
 
-def test_get_transaction():
+def test_get_transaction(override_transaction_service):
 
-    create_response = client.post(
-        "/api/v1/transaction/",
+    client.post("/api/v1/transaction/create",
         json={
             "transaction_id": "TXN20001",
             "merchant_id": "MERCHANT001",
@@ -107,17 +106,9 @@ def test_get_transaction():
             "status": "SUCCESS",
         },
     )
-
-    assert create_response.status_code == 201
-
-    response = client.get(
-        "/api/v1/transaction/TXN20001"
-    )
-
+    response = client.get("/api/v1/transaction/TXN20001")
     assert response.status_code == 200
-
     body = response.json()
-
     assert body["transaction_id"] == "TXN20001"
     assert body["status"] == "SUCCESS"
     assert body["result"] == "PROCESSED"

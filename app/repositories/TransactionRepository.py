@@ -4,6 +4,7 @@ class TransactionRepository:
 
     def __init__(self):
         self._transactions: dict[str, Transaction] = {}
+        
     def save(self,transaction: Transaction) -> Transaction:
         self._transactions[transaction.transaction_id] = transaction
         return transaction
