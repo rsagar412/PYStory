@@ -3,10 +3,10 @@ from pydantic import BaseModel, Field
 from app.models.Transaction import *
 
 class TransactionRequest(BaseModel):
-    transaction_id : str = Field(min_length=5)
-    merchant_id : str
-    customer_id : str
-    amount: Decimal
+    transaction_id : str = Field(min_length=5, max_length=50)
+    merchant_id : str = Field(min_length=5, max_length=50)
+    customer_id : str = Field(min_length=5, max_length=50)
+    amount: Decimal = Field(gt=0)
     currency: Currency
     status: TransactionStatus
 
